@@ -8,16 +8,9 @@ isValid = class_jogar.validaQuantidadeDeDezenas()
 if isValid:
     class_jogar.gerarJogos(quantidade_de_cartela)
     class_jogar.sortear()
-    print(f'Cartela Sorteada..: {class_jogar.getResultado()}')
-    for nro_da_cartela, cartela in enumerate(class_jogar.getJogos()):
-        contar_numeros_acertados = 0
-        guardar_numeros_acertados = []
-        for nro_acertados in class_jogar.resultadoDoSorteio():
-            if nro_acertados in cartela:
-                guardar_numeros_acertados.append(nro_acertados)
-                contar_numeros_acertados += 1
-        if contar_numeros_acertados > 0:
-            print(
-                f'Acertou {contar_numeros_acertados} ({guardar_numeros_acertados}) '
-                f'número(s) da Cartela-{nro_da_cartela+1}\n{"*"*50}'
-            )
+    print(f"Cartela Sorteada..: {class_jogar.getResultado()}")
+    cartela_sorteada = class_jogar.resultadoDoSorteio()
+    cartelas_jogadas = class_jogar.getJogos()
+    jogos_conferidos = class_jogar.confere_cartelas(cartelas_jogadas, cartela_sorteada)
+    for jogos in jogos_conferidos:
+        print(jogos)

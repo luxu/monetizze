@@ -29,9 +29,7 @@ class JogarMegasena:
         return self.cartela
 
     def setCartela(self):
-        cartelas = self._gerarCartelas(
-            self.getQuantidadeDeDezenas()
-        )
+        cartelas = self._gerarCartelas(self.getQuantidadeDeDezenas())
         self.cartela = cartelas
 
     def setTotalDeJogos(self, total_de_jogos):
@@ -86,6 +84,11 @@ class JogarMegasena:
         if numero not in cartelas:
             return numero
 
+    def gerarJogos(self, quantidade_de_cartela):
+        for cartela in range(quantidade_de_cartela):
+            self.setCartela()
+            self.setJogos()
+
     def sortear(self):
         cont = 0
         while cont < 6:
@@ -97,13 +100,25 @@ class JogarMegasena:
             except TypeError:
                 pass
 
-    def gerarJogos(self, quantidade_de_cartela):
-        for cartela in range(quantidade_de_cartela):
-            self.setCartela()
-            self.setJogos()
-
     def esvaziarCartela(self):
         self.cartela = []
 
     def resultadoDoSorteio(self):
         return self.getResultado()
+
+    def confere_cartelas(self, cartelas_jogadas, cartela_sorteada):
+        jogos_conferidos = []
+        for nro_da_cartela, cartela in enumerate(cartelas_jogadas):
+            contar_numeros_acertados = 0
+            guardar_numeros_acertados = []
+            for nro_acertados in cartela_sorteada:
+                if nro_acertados in cartela:
+                    guardar_numeros_acertados.append(nro_acertados)
+                    contar_numeros_acertados += 1
+            if contar_numeros_acertados > 0:
+                resultado_em_texto = (
+                    f"Acertou {contar_numeros_acertados} ({guardar_numeros_acertados})"
+                )
+                resultado_em_texto += f" número(s) da Cartela-{nro_da_cartela + 1}"
+                jogos_conferidos.append(resultado_em_texto)
+        return jogos_conferidos
