@@ -35,7 +35,7 @@ def index(request):
             context = {
                 'jogos': jogar.getJogos(),
                 'qt_de_cartela_do_jogo': len(jogar.getJogos()),
-                'resultado': list(jogar.resultadoDoSorteio()),
+                'resultado': jogar.resultadoDoSorteio(),
                 'cartelas_sorteadas': lista,
                 'escolher': True
             }
